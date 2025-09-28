@@ -14,15 +14,15 @@ export class GithubRepositoryGateway implements RepositoryGateway {
   }
 
   async searchRepositories(params: SearchParams): Promise<SearchResult> {
-    const { q, language, createdAfter, page = 1, perPage = 20 } = params;
-    let query = q;
-    if (language) query += ` language:${language}`;
-    if (createdAfter) query += ` created:>=${createdAfter}`;
+    const { query, language, createdAfter, page = 1, perPage = 20 } = params;
+    let q = query;
+    if (language) q += ` language:${language}`;
+    if (createdAfter) q += ` created:>=${createdAfter}`;
 
     const res = await this.http.get<GithubSearchResponse>('/search/repositories', {
       baseURL: 'https://api.github.com',
       headers: { Accept: 'application/vnd.github+json', ...this.authHeader },
-      params: { q: query, page, per_page: perPage },
+      params: { q, page, per_page: perPage },
       timeout: 5000,
     });
 

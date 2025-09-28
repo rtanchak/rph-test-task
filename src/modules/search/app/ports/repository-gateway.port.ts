@@ -1,7 +1,7 @@
 import { Repo } from '../../model/repo';
 
 export interface SearchParams {
-  q: string;
+  query: string;
   language?: string;
   createdAfter?: string;
   page?: number;

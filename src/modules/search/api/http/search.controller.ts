@@ -1,26 +1,21 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { SearchReposQueryDto } from '../../dto/search-repos.query';
-import { SearchResponseDto } from '../../dto/repo.dto';
+import { SearchQueryDto } from './dto/search-query.dto';
+import { SearchResponseDto } from './dto/repo.response.dto';
+import { SearchUseCase } from '../../app/usecases/search.usecase';
 
 @Controller('api/repos')
 export class SearchController {
+  constructor(private readonly searchUseCase: SearchUseCase) {}
+
   @Get('search')
-  async search(@Query() query: SearchReposQueryDto): Promise<SearchResponseDto> {
-    return {
-      total: 1,
-      items: [
-        {
-          id: 1,
-          fullName: 'octocat/Hello-World',
-          htmlUrl: 'https://github.com/octocat/Hello-World',
-          description: 'Example repository',
-          stars: 42,
-          forks: 7,
-          updatedAt: new Date().toISOString(),
-          language: query.language ?? 'TypeScript',
-          score: 0,
-        },
-      ],
-    };
+  async search(@Query() q: SearchQueryDto): Promise<SearchResponseDto> {
+    const res = await this.searchUseCase.execute({
+      query: q.query,
+      language: q.language,
+      createdAfter: q.created_after,
+      page: q.page,
+      perPage: q.per_page,
+    });
+    return res;
   }
 }
