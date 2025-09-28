@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 import configuration from './config/configurations';
 import { HealthController } from './health/health.controller';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { HealthController } from './health/health.controller';
             : undefined,
       },
     }),
+    SearchModule,
   ],
   controllers: [HealthController],
 })
