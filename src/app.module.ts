@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 import configuration from './config/configurations';
-import { HealthController } from './health/health.controller';
-import { SearchModule } from './search/search.module';
+import { HealthController } from './modules/health/health.controller';
+import { SearchModule } from './modules/search/search.module';
+import { HttpModule } from './core/http/http.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { SearchModule } from './search/search.module';
       },
     }),
     SearchModule,
+    HttpModule,
   ],
   controllers: [HealthController],
 })

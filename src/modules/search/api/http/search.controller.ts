@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { SearchReposQueryDto } from './dto/search-repos.query';
-import { SearchResponseDto } from './dto/repo.dto';
+import { SearchReposQueryDto } from '../../dto/search-repos.query';
+import { SearchResponseDto } from '../../dto/repo.dto';
 
 @Controller('api/repos')
 export class SearchController {
