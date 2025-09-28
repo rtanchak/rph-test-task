@@ -5,6 +5,7 @@ import configuration from './config/configurations';
 import { HealthController } from './modules/health/health.controller';
 import { SearchModule } from './modules/search/search.module';
 import { HttpModule } from './core/http/http.module';
+import { CacheModule } from './core/cache/cache.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { HttpModule } from './core/http/http.module';
       },
     }),
     SearchModule,
+    CacheModule,
     HttpModule,
   ],
   controllers: [HealthController],
