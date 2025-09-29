@@ -1,15 +1,18 @@
-export interface RepoResponseDto {
-  id: number;
-  fullName: string;
-  htmlUrl: string;
-  description?: string;
-  stars: number;
-  forks: number;
-  updatedAt: string;
-  language?: string;
-  score: number;
+import { ApiProperty } from '@nestjs/swagger';
+
+export class RepoResponseDto {
+  @ApiProperty() id!: number;
+  @ApiProperty() fullName!: string;
+  @ApiProperty() htmlUrl!: string;
+  @ApiProperty({ required: false }) description?: string;
+  @ApiProperty() stars!: number;
+  @ApiProperty() forks!: number;
+  @ApiProperty({ description: 'ISO timestamp of last update' }) updatedAt!: string;
+  @ApiProperty({ required: false }) language?: string;
+  @ApiProperty({ description: 'Computed popularity score' }) score!: number;
 }
-export interface SearchResponseDto {
-  total: number;
-  items: RepoResponseDto[];
+
+export class SearchResponseDto {
+  @ApiProperty() total!: number;
+  @ApiProperty({ type: [RepoResponseDto] }) items!: RepoResponseDto[];
 }

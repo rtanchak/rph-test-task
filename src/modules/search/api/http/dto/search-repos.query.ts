@@ -2,7 +2,7 @@ import { IsInt, IsOptional, IsString, Min, Max, Matches } from 'class-validator'
 
 export class SearchReposQueryDto {
   @IsString()
-  q!: string; // обов'язково
+  query!: string;
 
   @IsOptional()
   @IsString()
